@@ -1,0 +1,170 @@
+<link href="/style.css" rel="stylesheet" type="text/css">
+<link href="/style.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Resume - Start Bootstrap Theme</title>
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top" style="color:#ffffff;">
+      <span class="d-block d-lg-none">Clarence Taylor</span>
+      <span class="d-none d-lg-block">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2"
+          src="https://image.flaticon.com/icons/svg/741/741407.svg" style="width:200px" alt="">
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="../agregar-gasolinera">Agregar Gasolinera</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="../gasolinera">Gasolinera</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" routerLink="../registrar-carro">Registrar Carro</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid p-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+      <div class="w-100">
+        <h1 class="mb-0">Agrega un nuevo
+          <span class="text-primary">Carro</span>
+        </h1>
+
+
+        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls mb-0 pb-2">
+              <br>
+              <label>Id Estación:</label><br>
+              <input class="form-control" id="idStation" type="number" [(ngModel)]="idStation"
+                [ngModelOptions]="{standalone: true}" placeholder="idStation" required="required">
+              <p class="help-block text-danger"></p>
+            </div>
+            <div class="form-group">
+              <br>
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" (click)="searchStation()"
+                style="background-color:#2C3E50;">Buscar</button><br><br>
+            </div>
+          </div>
+
+          <div *ngIf="buscadoestacion==true">
+            <div style="margin-bottom:50px;background-color:#ffffff!important;border-radius:10px;padding: 10px;">
+              <div style="background-color: #007bff!important;padding: 8px;border-radius: 5px;color:#ffffff;width:70%;">
+                <p><b>Estación: {{idStation}}</b></p>
+                <p><b>Depósito Necesario:</b> {{deposito}}</p>
+                <p><b>Tipos de Gas:</b>{{cantidadFuels}}</p>
+              </div>
+              <br><br>
+              <table style="width:70%;background-color:#007bff8a;">
+                <tr style="background-color: #007bff;color:#ffffff;border: solid 2px #ffffff;">
+                  <td><b>Id</b></td>
+                  <td><b>Precio</b></td>
+                  <td><b>Cantidad</b></td>
+                </tr>
+                <tr *ngFor="let fuel of Fuels">
+                  <td>{{fuel.id}}</td>
+                  <td> {{fuel.precio}}</td>
+                  <td> {{fuel.cantDisponible}}</td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label> Id Carro</label>
+                <input class="form-control" id="tipogas" type="number" [(ngModel)]="idCarro"
+                  [ngModelOptions]="{standalone: true}" placeholder="Tipo de Gas" required="required">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Tipo de Gas</label>
+                <select style="width: 70%!important;" name="select" class="form-control" id="tipogas" type="number"
+                  [(ngModel)]="tipogas" [ngModelOptions]="{standalone: true}" required="required">
+                  <option value="0">Extra</option>
+                  <option value="1" selected>Corriente</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls mb-0 pb-2">
+                <label>Cantidad a Llenar</label>
+                <input class="form-control" id="cantidadSolicitada" [(ngModel)]="cantidadSolicitada"
+                  [ngModelOptions]="{standalone: true}" type="text" placeholder="Cantidad Solicitada"
+                  required="required">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <p>Depósito a Enviar: {{deposito}}</p>
+            <div class="form-group">
+              <br>
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" (click)="sendDeposit()"
+                style="background-color:#2C3E50;">Enviar Depósito</button>
+            </div>
+            <br><br>
+            <p>Total a Pagar: {{total}}</p>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-xl" id="consultarDeposito" (click)="consultarDeposito()"
+                style="background-color:#2C3E50;">Consultar Deposito</button>
+              <br><br><br>
+              <p>Total Consignado: {{depositous}}</p>
+
+              <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" (click)="sendFuel()"
+                style="background-color:#2C3E50;">Llenar Tanque</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/resume.min.js"></script>
+
+</body>
+
+</html>
